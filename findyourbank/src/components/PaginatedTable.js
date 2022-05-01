@@ -7,21 +7,13 @@ import GlobalFilter from "./GlobalFilter";
 export const PaginatedTable = ({ data, isLoading }) => {
   const navigate = useNavigate();
   const expandRow = (row) => {
-    // console.log(row.original);
     navigate(`/banks/${row.original.ifsc}`);
     localStorage.setItem("bank-details", JSON.stringify(row.original));
   };
 
-
-  
-
-
-  const [query,setQuery] = useState('')
-
+  const [query, setQuery] = useState("");
 
   const productsData = useMemo(() => [...data], [data]);
-
-  
 
   const productsColumns = useMemo(
     () =>
@@ -31,34 +23,11 @@ export const PaginatedTable = ({ data, isLoading }) => {
             .filter((key) => key !== "district")
             .filter((key) => key !== "state")
             .map((key) => {
-              return{ Header: key, accessor: key }            
+              return { Header: key, accessor: key };
             })
         : [],
     [data]
   );
-
-
-  // const tableHooks = (hooks) => {
-  //   hooks.visibleColumns.push((columns) => [
-  //     ...columns,
-  //     {
-  //       id: "Favorties",
-  //       Header: "Favorties",
-  //       Cell: ({ row }) => (
-  //         <div>
-  //           <button onClick={() =>{
-  //           setFavorites(row.original)
-  //           }
-  //           }>
-  //           Favorite
-  //         </button>
-  //         {/* <input name="checkbox" type="checkbox" checked={false}  > 
-  //         </input>*/}
-  //          </div> 
-  //       ),
-  //     },
-  //   ]);
-  // };
 
   const tableInstance = useTable(
     {
@@ -66,9 +35,7 @@ export const PaginatedTable = ({ data, isLoading }) => {
       data: productsData,
     },
     useGlobalFilter,
-    usePagination,
-    // tableHooks
-    // useSortBy
+    usePagination
   );
 
   const {
@@ -94,10 +61,14 @@ export const PaginatedTable = ({ data, isLoading }) => {
   return isLoading ? (
     <h1>Loading..</h1>
   ) : (
-    <> 
-    <div className="searchStyle"> 
-    <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} getQuery={(q)=>setQuery(q)} />
-      </div> 
+    <>
+      <div className="searchStyle">
+        <GlobalFilter
+          filter={globalFilter}
+          setFilter={setGlobalFilter}
+          getQuery={(q) => setQuery(q)}
+        />
+      </div>
       <div className="container">
         <table {...getTableProps()}>
           <thead>
@@ -120,10 +91,10 @@ export const PaginatedTable = ({ data, isLoading }) => {
                     return (
                       <td
                         {...cell.getCellProps()}
-                        onClick={ () => {
-                            expandRow(row)}
-                          }
-                        >
+                        onClick={() => {
+                          expandRow(row);
+                        }}
+                      >
                         {cell.render("Cell")}
                       </td>
                     );
@@ -135,55 +106,52 @@ export const PaginatedTable = ({ data, isLoading }) => {
         </table>
       </div>
 
-        <div className="container1">
-          <span>
-            {" "}
-            <strong>
-              {pageIndex + 1} of {pageOptions.length}
-            </strong>
-            {"  "}
-          </span>
-          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-            {"<<"}
-          </button>
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            Previous
-          </button>
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
-            Next{" "}
-          </button>
-          <button
-            onClick={() => gotoPage(pageCount - 1)}
-            disabled={!canNextPage}
-          >
-            {">>"}{" "}
-          </button>
-          <span>
-            {"   "} Go to page:{"   "}
-            <input
-              type="number"
-              defaultValue={pageIndex + 1}
-              onChange={(e) => {
-                const pageNumber = e.target.value
-                  ? Number(e.target.value) - 1
-                  : 0;
-                gotoPage(pageNumber);
-              }}
-              style={{ width: "50px" }}
-            />
-          </span>{" "}
-          <select
-            className="select-class-1"
-            value={pageSize}
-            onChange={(e) => setPageSize(Number(e.target.value))}
-          >
-            {[10, 25, 50].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
-                Show {pageSize}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div className="container1">
+        <span>
+          {" "}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>
+          {"  "}
+        </span>
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {"<<"}
+        </button>
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          Previous
+        </button>
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          Next{" "}
+        </button>
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {">>"}{" "}
+        </button>
+        <span>
+          {"   "} Go to page:{"   "}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={(e) => {
+              const pageNumber = e.target.value
+                ? Number(e.target.value) - 1
+                : 0;
+              gotoPage(pageNumber);
+            }}
+            style={{ width: "50px" }}
+          />
+        </span>{" "}
+        <select
+          className="select-class-1"
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          {[10, 25, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
     </>
   );
 };

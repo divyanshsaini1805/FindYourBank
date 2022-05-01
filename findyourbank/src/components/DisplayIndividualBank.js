@@ -26,7 +26,6 @@ export default function DisplayIndividualBank() {
             <th>branch</th>
             <th>address</th>
             <th>Bank Name</th>
-             {/* <th>Favorite</th>  */}
           </tr>
         </thead>
         <tbody>
