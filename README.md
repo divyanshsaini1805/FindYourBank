@@ -1,6 +1,7 @@
 # FindYourBank
 
+### Groww Intern Submission
+## Built tha app with Reactjs using libraries like React-Table, Axios and React-router-dom.
 
-### Built tha app using Reactjs using libraries like React-Table, Axios and React-router-dom.
 
 
