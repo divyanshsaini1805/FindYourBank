@@ -1,0 +1,35 @@
+.containerr{
+    width: full;
+    max-width: full;
+    display: flex;
+    flex-direction: row;
+    align-items:flex-end;
+    justify-content:flex-end;
+    padding-top: 6px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin:10px;
+    line-height: 10px;
+    }
+
+.cont{
+    width: full;
+    max-width: full;
+    display: flex;
+    flex-direction: row;
+    align-items:flex-end;
+    justify-content:flex-end;
+    padding-top: 6px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin:10px;
+    line-height: 10px;
+    }
+
+.select-class{
+    height: 30px;
+    width: 200px;
+}
+
